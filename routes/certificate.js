@@ -12,18 +12,15 @@ const upload = multer({ dest: "uploads/" });
 function formatDate(dateString) {
     if (!dateString) return "";
     
-    // If already in DD/MM/YYYY format, return as is
     if (dateString.match(/^\d{2}\/\d{2}\/\d{4}$/)) {
         return dateString;
     }
     
-    // Convert from YYYY-MM-DD to DD/MM/YYYY
     const parts = dateString.split('-');
     if (parts.length === 3) {
         return `${parts[2]}/${parts[1]}/${parts[0]}`;
     }
     
-    // If it's already in some other format, try to parse it
     try {
         const date = new Date(dateString);
         if (!isNaN(date)) {
@@ -32,11 +29,45 @@ function formatDate(dateString) {
             const year = date.getFullYear();
             return `${day}/${month}/${year}`;
         }
-    } catch (e) {
-        // If all fails, return original
-    }
+    } catch (e) {}
     
     return dateString;
+}
+
+// Helper function to wrap text to multiple lines
+function wrapText(text, maxWidth, font, fontSize) {
+    const lines = [];
+    const paragraphs = text.split('\n');
+    
+    for (const paragraph of paragraphs) {
+        if (paragraph.trim() === '') {
+            lines.push('');
+            continue;
+        }
+        
+        const words = paragraph.split(' ');
+        let currentLine = '';
+        
+        for (const word of words) {
+            const testLine = currentLine ? `${currentLine} ${word}` : word;
+            const testWidth = font.widthOfTextAtSize(testLine, fontSize);
+            
+            if (testWidth <= maxWidth) {
+                currentLine = testLine;
+            } else {
+                if (currentLine) {
+                    lines.push(currentLine);
+                }
+                currentLine = word;
+            }
+        }
+        
+        if (currentLine) {
+            lines.push(currentLine);
+        }
+    }
+    
+    return lines;
 }
 
 /* =========================
@@ -44,11 +75,17 @@ INDIVIDUAL COORDINATES FOR EACH CERTIFICATE
 ========================= */
 
 const CERTIFICATE_COORDINATES = {
-    // VOLUNTEER
+    // VOLUNTEER - Updated with event text positioning
     volunteer: {
-        name: { x: 0, y: 462, size: 40 },
-        event: { x: 660, y: 409, size: 18 },
-        date: { x: 298, y: 210, size: 20 }
+        name: { x: 0, y: 770, size: 45 },
+        event: { 
+            x: 999, 
+            y: 620, 
+            size: 27, 
+            color: { r: 81, g: 46, b: 30 },
+            maxWidth: 1100  // Maximum width for text wrapping
+        },
+        date: { x: 498, y: 352, size: 35 }
     },
 
     // ALL 36 VDP CERTIFICATES
@@ -463,18 +500,56 @@ async function generatePDF(type, templatePath, name, event, date, output) {
             color: rgb(0, 0, 0)
         });
 
-        // DRAW EVENT (only for volunteer type)
+        // DRAW EVENT (only for volunteer type) - Updated with multi-line support
         if (type === "volunteer" && event) {
-            const eventFont = await pdf.embedFont(StandardFonts.HelveticaBold);
+            // Use HelveticaOblique for italic style
+            const eventFont = await pdf.embedFont(StandardFonts.HelveticaBoldOblique);
             const volunteerCoords = CERTIFICATE_COORDINATES.volunteer;
+            
             if (volunteerCoords.event) {
-                const eventWidth = eventFont.widthOfTextAtSize(event, volunteerCoords.event.size);
-                page.drawText(event, {
-                    x: volunteerCoords.event.x - (eventWidth / 2),
-                    y: volunteerCoords.event.y,
-                    size: volunteerCoords.event.size,
-                    font: eventFont
-                });
+                // Get the max width for text wrapping
+                const maxWidth = volunteerCoords.event.maxWidth || 600;
+                const fontSize = volunteerCoords.event.size;
+                
+                // Wrap the text into multiple lines
+                const lines = wrapText(event, maxWidth, eventFont, fontSize);
+                
+                // Get color
+                let color = rgb(110/255, 71/255, 55/255); // #6e4737 default
+                if (volunteerCoords.event.color) {
+                    color = rgb(
+                        volunteerCoords.event.color.r / 255,
+                        volunteerCoords.event.color.g / 255,
+                        volunteerCoords.event.color.b / 255
+                    );
+                }
+                
+                // Calculate line height (1.4x font size like in preview)
+                const lineHeight = fontSize * 1.6;
+                
+                // Calculate total height of all lines
+                const totalTextHeight = lines.length * lineHeight;
+                
+                // Start Y position (centered vertically)
+                const startY = volunteerCoords.event.y + (totalTextHeight / 2);
+                
+                // Draw each line
+                for (let i = 0; i < lines.length; i++) {
+                    const line = lines[i];
+                    const lineWidth = eventFont.widthOfTextAtSize(line, fontSize);
+                    
+                    // Center the line horizontally
+                    const x = volunteerCoords.event.x - (lineWidth / 2);
+                    const y = startY - (i * lineHeight);
+                    
+                    page.drawText(line, {
+                        x: x,
+                        y: y,
+                        size: fontSize,
+                        font: eventFont,
+                        color: color
+                    });
+                }
             }
         }
 
