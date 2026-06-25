@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Certificate Dashboard</title>
+<link rel="stylesheet" href="/css/dashboard.css">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;1,600&family=Poppins:ital,wght@0,400;0,600;1,600&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="dashboard">
+
+<!-- LEFT SIDEBAR -->
+<div class="sidebar">
+<h2>KOKAN NGO INDIA</h2>
+
+<!-- VOLUNTEER -->
+<div class="menuItem">
+    <button id="volunteerBtn" class="category active">Volunteer</button>
+</div>
+
+<!-- VDP - ALL 36 EVENTS -->
+<div class="menuItem">
+    <label>VDP</label>
+    <select id="vdpSelect" class="eventSelect">
+        <option value="">Select VDP Event</option>
+        <option value="Wafers Making" data-src="/assets/vdp/Wafers Making - Certificate.png">Wafers Making</option>
+        <option value="Vermicompost" data-src="/assets/vdp/Vermicompost - Certificate.png">Vermicompost</option>
+        <option value="Value-Added Products from Cashews" data-src="/assets/vdp/Value-Added Products from Cashews - Certificate.png">Value-Added Products from Cashews</option>
+        <option value="Spoken English Course" data-src="/assets/vdp/Spoken English Course - Certificate.png">Spoken English Course</option>
+        <option value="Spice Making" data-src="/assets/vdp/Spice Making - Certificate.png">Spice Making</option>
+        <option value="Soap Making and Agarbattii" data-src="/assets/vdp/Soap Making and  Agarbattii - Certificate New-1.png">Soap Making and Agarbattii</option>
+        <option value="Poultry Training" data-src="/assets/vdp/Poultry Training - Certificate.png">Poultry Training</option>
+        <option value="Personality Development" data-src="/assets/vdp/Personality Development - Certificate.png">Personality Development</option>
+        <option value="Papad and Pickel Making" data-src="/assets/vdp/Papad Making Updated.png">Papad and Pickel Making</option>
+        <option value="Organic Fertilizer" data-src="/assets/vdp/Organic Fertilizer - Certificate.png">Organic Fertilizer</option>
+        <option value="Nauvari Saree Stitching" data-src="/assets/vdp/Nauvari Saree Stitching - Certificate.png">Nauvari Saree Stitching</option>
+        <option value="Nath Making Course" data-src="/assets/vdp/Nath Making Course Certificate.png">Nath Making Course</option>
+        <option value="Micron Making" data-src="/assets/vdp/Micron Making- certificate-1.png">Micron Making</option>
+        <option value="Mehandi Training" data-src="/assets/vdp/Mehandi Training-1.png">Mehandi Training</option>
+        <option value="Masala Making" data-src="/assets/vdp/Masala Making Certificate-1.png">Masala Making</option>
+        <option value="Karate Training" data-src="/assets/vdp/Karate Training-1.png">Karate Training</option>
+        <option value="Jute Bag Making" data-src="/assets/vdp/Jute Bag Making Certificate-1.png">Jute Bag Making</option>
+        <option value="Jewelry Making" data-src="/assets/vdp/Jewelry Making Certificate-1.png">Jewelry Making</option>
+        <option value="Jackfruit Processing" data-src="/assets/vdp/Jackfruit Processing-1.png">Jackfruit Processing</option>
+        <option value="Incense Stick Making" data-src="/assets/vdp/Incense Stick Making - Certificate-1.png">Incense Stick Making</option>
+        <option value="Homemade Hygiene Products" data-src="/assets/vdp/Homemade Hygiene Products - Certificate-1.png">Homemade Hygiene Products</option>
+        <option value="Gravy Making" data-src="/assets/vdp/Gravy Making - Certificate-1.png">Gravy Making</option>
+        <option value="Fruit Processing" data-src="/assets/vdp/Fruit Processing - Certificate-1.png">Fruit Processing</option>
+        <option value="Fast Food Making" data-src="/assets/vdp/Fast Food Making Certificate-1.png">Fast Food Making</option>
+        <option value="Fast food and Snacks Making" data-src="/assets/vdp/Fast food and Snacks Making-1.png">Fast food and Snacks Making</option>
+        <option value="Fashion Designing" data-src="/assets/vdp/Fashion Designing - Certificate-1.png">Fashion Designing</option>
+        <option value="Fabric Making" data-src="/assets/vdp/Fabric Making - Certificate-1.png">Fabric Making</option>
+        <option value="Dough Making" data-src="/assets/vdp/Dough Making - Certificate-1.png">Dough Making</option>
+        <option value="Cloth Bag Making" data-src="/assets/vdp/Cloth Bag Making - Certificate-1.png">Cloth Bag Making</option>
+        <option value="Cloth and Jute Bag Making" data-src="/assets/vdp/Cloth  Jute Bag Making Course-1.png">Cloth and Jute Bag Making</option>
+        <option value="Candle Making" data-src="/assets/vdp/Candle Making - Certificate-1.png">Candle Making</option>
+        <option value="Cake Making" data-src="/assets/vdp/Cake Making.png">Cake Making</option>
+        <option value="Cake Decoration" data-src="/assets/vdp/Cake Decoration.png">Cake Decoration</option>
+        <option value="Beauty Parlour" data-src="/assets/vdp/Beauty Parlour.png">Beauty Parlour</option>
+        <option value="Candle And Incense Stick" data-src="/assets/vdp/Candle And Incense Stick - Certificate-1.png">Candle And Incense Stick</option>
+        <option value="Advance Beauty Parlour" data-src="/assets/vdp/Advance Beauty Parlour.png">Advance Beauty Parlour</option>
+    </select>
+</div>
+
+<!-- APPRECIATION -->
+<div class="menuItem">
+    <label>Appreciation</label>
+    <select id="appSelect" class="eventSelect">
+        <option value="">Select Appreciation Event</option>
+        <option value="Employee Appreciation" data-src="/assets/appriciation/employee-appriciation.png">Employee Appreciation</option>
+        <option value="Wish Tree Appreciation" data-src="/assets/appriciation/wish-tree-app.png">Wish Tree Appreciation</option>
+        <option value="Donor Appreciation" data-src="/assets/appreciation/Appreciation 3.png">Donor Appreciation</option>
+    </select>
+</div>
+
+<!-- OTHER -->
+<div class="menuItem">
+    <label>Other</label>
+    <select id="otherSelect" class="eventSelect">
+        <option value="">Select Certificate</option>
+        <option value="Employee of the Month" data-src="/assets/other/Other Certificate 1.png">Employee of the Month</option>
+        <option value="Employee of the Year" data-src="/assets/other/Other Certificate 2.png">Employee of the Year</option>
+        <option value="Team of the Year" data-src="/assets/other/Other Certificate 3.png">Team of the Year</option>
+        <option value="TTT Certificate" data-src="/assets/other/Other Certificate 4.png">TTT Certificate</option>
+        <option value="Aari Work" data-src="/assets/other/Other Certificate 5.png">Aari Work</option>
+        <option value="Tailoring Certificate" data-src="/assets/other/Other Certificate 6.png">Tailoring Certificate</option>
+        <option value="Partner Trainer" data-src="/assets/other/Other Certificate 7.png">Partner Trainer</option>
+    </select>
+</div>
+
+<button id="logoutBtn">Logout</button>
+</div>
+
+<!-- RIGHT CONTENT -->
+<div class="content">
+    <h1 id="pageTitle">Volunteer</h1>
+
+    <div class="modeBox">
+        <button id="singleBtn" class="mode active">Single</button>
+        <button id="bulkBtn" class="mode">Bulk</button>
+    </div>
+
+    <!-- SINGLE SECTION -->
+    <div id="singleSection">
+        <div class="form">
+            <label>Name</label>
+            <input id="name" placeholder="Enter full name">
+            
+            <div id="eventField">
+                <label>Event</label>
+                <input id="event" placeholder="Enter event name">
+            </div>
+            
+            <label>Date</label>
+            <input type="date" id="date">
+            
+            <div class="actionButtons">
+                <button id="previewBtn">Preview</button>
+                <button id="editBtn" style="display:none;">Edit</button>
+                <button id="generateSingle" style="display:none;">Generate PDF</button>
+            </div>
+        </div>
+
+        <div class="preview">
+            <h3>Preview</h3>
+            <div class="previewBox">
+                <img id="previewImage" src="/assets/volunteer-template.png" alt="Certificate Preview">
+                <div id="previewName"></div>
+                <div id="previewEvent"></div>
+                <div id="previewDate"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BULK SECTION -->
+<div id="bulkSection" style="display:none;">
+    <label>Upload Excel File (.xlsx)</label>
+    <input type="file" id="excelFile" accept=".xlsx,.xls">
+    <div class="bulk-info" id="bulkInfo">
+        <strong>Excel Format:</strong><br>
+        Column 1: Name (required)<br>
+        Column 2: Event Name (required)<br>
+        Column 3: Date (required) - Format: DD/MM/YYYY
+    </div>
+    <button id="generateBulk">Generate ZIP</button>
+</div>
+</div>
+</div>
+
+<script src="/js/dashboard.js"></script>
+</body>
+</html>
